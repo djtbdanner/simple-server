@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8" />
+
+<head>
+	<title>CORS test</title>
+</head>
+
+<body>
+	<form>
+		</br>
+		URL:<input type="text" size="80" id="url" value="https://qafxeh7lp6.execute-api.us-east-1.amazonaws.com" />
+		</br>
+		<input type="button" id="button" onClick="callAPI()" value="test" />
+		</br>
+		<textarea id="text" rows="4" cols="50">API results will appear here.</textarea>
+		<script>
+			function callAPI() {
+				document.getElementById(`text`).value = `calling api...`;
+				const url = document.getElementById(`url`).value;
+				console.log(url);
+				const http = new XMLHttpRequest();
+				http.open('GET', url, true);
+				http.send();
+				http.onreadystatechange = function () {
+					if (this.readyState == 4 && this.status == 200) {
+						document.getElementById(`text`).value = http.responseText;
+					}
+				};
+				http.onerror = function () {
+					alert("Unfortunately, we've experienced an error." + http.responseText);
+				}
+			}
+		</script>
+</body>
+
+</html>
