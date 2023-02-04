@@ -20,8 +20,8 @@
 				const url = document.getElementById(`url`).value;
 				console.log(url);
 				const http = new XMLHttpRequest();
-				http.open('GET', url, true);
-				http.send();
+				http.open('POST', url, true);
+				http.send('this is body');
 				http.onreadystatechange = function () {
 					if (this.readyState == 4 && this.status == 200) {
 						document.getElementById(`text`).value = http.responseText;
